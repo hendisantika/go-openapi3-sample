@@ -83,3 +83,36 @@ func (b *Blog) CreateBlog(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "data": incomingBlog})
 }
+
+func (b *Blog) UpdateBlog(c *gin.Context) {
+	id := c.Param("id")
+
+	// Convert the ID to an integer
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": err.Error()})
+		return
+	}
+
+	// Find the blog with the matching ID
+	for index, blog := range blogs {
+		if blog.ID == intID {
+			// Parse the request body to get the updated blog data
+			var updatedBlog Blog
+			err := c.BindJSON(&updatedBlog)
+			if err != nil {
+				c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": err.Error()})
+				return
+			}
+
+			// Update the blog with the new data
+			updatedBlog.ID = intID
+			blogs[index] = updatedBlog
+
+			// Respond with the updated blog
+			c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": updatedBlog})
+			return
+		}
+	}
+	c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "Blog not found"})
+}
