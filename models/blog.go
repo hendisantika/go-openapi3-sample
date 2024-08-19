@@ -1,5 +1,11 @@
 package models
 
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"strconv"
+)
+
 type Blog struct {
 	ID          int    `json:"id"`
 	Title       string `json:"title"`
@@ -42,4 +48,24 @@ var blogs = []Blog{
 		Author:      "Jane Doe",
 		IsPublished: true,
 	},
+}
+
+func (b *Blog) GetBlogs(c *gin.Context) {
+	id := c.Param("id")
+
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": err.Error()})
+		return
+	}
+
+	//find blog whose id matched the param id
+	for _, blog := range blogs {
+		if blog.ID == intID {
+			c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": blog})
+			return
+		}
+	}
+
+	c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "Blog not found"})
 }
