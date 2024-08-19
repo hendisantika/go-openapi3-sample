@@ -6,13 +6,38 @@ import (
 	"strconv"
 )
 
+// Blog represents a blog post with a title, description, body, author, and publication status.
+// swagger:model
 type Blog struct {
-	ID          int    `json:"id"`
-	Title       string `json:"title"`
+	// The ID of the blog
+	//
+	// example: 1
+	ID int `json:"id"`
+
+	// The title of the blog
+	// required: true
+	// example: My first blog
+	Title string `json:"title"`
+
+	// The description of the blog
+	//
+	// example: This is my first blog
 	Description string `json:"description"`
-	Body        string `json:"body"`
-	Author      string `json:"author"`
-	IsPublished bool   `json:"isPublished"`
+
+	// The body of the blog
+	// required: true
+	// example: This is the body of my first blog
+	Body string `json:"body"`
+
+	// The author of the blog
+	// required: true
+	// example: John Doe
+	Author string `json:"author"`
+
+	// The publication status of the blog
+	// required: true
+	// example: true
+	IsPublished bool `json:"isPublished"`
 }
 
 var blogs = []Blog{
