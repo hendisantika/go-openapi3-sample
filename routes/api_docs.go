@@ -53,3 +53,13 @@ func CreateBlog() {}
 //	400: errorResponse
 //	404: errorResponse
 func UpdateBlog() {}
+
+// swagger:route DELETE /blogs/{id} blogs deleteBlog
+//
+// DeleteBlog deletes a blog by its ID.
+//
+// Responses:
+//
+//		200: successResponse
+//	   404: errorResponse
+func DeleteBlog() {}
