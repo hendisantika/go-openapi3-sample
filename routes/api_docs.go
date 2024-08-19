@@ -13,3 +13,12 @@
 //
 // swagger:meta
 package routes
+
+// swagger:route GET /blogs blogs getBlogs
+//
+// GetBlogs returns all blogs.
+//
+// Responses:
+//
+//	200: successResponse
+func GetBlogs() {}
