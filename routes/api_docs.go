@@ -42,3 +42,14 @@ func GetBlog() {}
 //	201: successResponse
 //	400: errorResponse
 func CreateBlog() {}
+
+// swagger:route PUT /blogs/{id} blogs updateBlog
+//
+// UpdateBlog updates a blog by its ID.
+//
+// Responses:
+//
+//	200: successResponse
+//	400: errorResponse
+//	404: errorResponse
+func UpdateBlog() {}
