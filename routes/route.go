@@ -1,4 +1,4 @@
-package models
+package routes
 
 import (
 	"github.com/gin-gonic/gin"
@@ -51,6 +51,10 @@ var blogs = []Blog{
 }
 
 func (b *Blog) GetBlogs(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": blogs})
+}
+
+func (b *Blog) GetBlog(c *gin.Context) {
 	id := c.Param("id")
 
 	intID, err := strconv.Atoi(id)
