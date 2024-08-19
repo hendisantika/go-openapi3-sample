@@ -32,3 +32,13 @@ func GetBlogs() {}
 //		200: successResponseR
 //	   400: errorResponse
 func GetBlog() {}
+
+// swagger:route POST /blogs blogs createBlog
+//
+// CreateBlog creates a new blog and returns it.
+//
+// Responses:
+//
+//	201: successResponse
+//	400: errorResponse
+func CreateBlog() {}
