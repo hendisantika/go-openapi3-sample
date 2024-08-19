@@ -116,3 +116,21 @@ func (b *Blog) UpdateBlog(c *gin.Context) {
 	}
 	c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "Blog not found"})
 }
+
+func (b *Blog) DeleteBlog(c *gin.Context) {
+	id := c.Param("id")
+
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": err.Error()})
+	}
+
+	for index, blog := range blogs {
+		if blog.ID == intID {
+			blogs = append(blogs[:index], blogs[index+1:]...)
+			c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "message": "Blog deleted successfully"})
+			return
+		}
+	}
+	c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "Blog could not be deleted. Blog not found"})
+}
