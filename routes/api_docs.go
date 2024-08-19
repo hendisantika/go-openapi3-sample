@@ -22,3 +22,13 @@ package routes
 //
 //	200: successResponse
 func GetBlogs() {}
+
+// swagger:route GET /blogs/{id} blogs getBlog
+//
+// GetBlog returns a blog by its ID.
+//
+// Responses:
+//
+//		200: successResponseR
+//	   400: errorResponse
+func GetBlog() {}
