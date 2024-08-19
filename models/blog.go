@@ -69,3 +69,17 @@ func (b *Blog) GetBlogs(c *gin.Context) {
 
 	c.JSON(http.StatusNotFound, gin.H{"status": http.StatusNotFound, "message": "Blog not found"})
 }
+
+func (b *Blog) CreateBlog(c *gin.Context) {
+	var incomingBlog Blog
+
+	incomingBlog.ID = len(blogs) + 1
+	err := c.BindJSON(&incomingBlog)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": err.Error()})
+		return
+	}
+	blogs = append(blogs, incomingBlog)
+
+	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "data": incomingBlog})
+}
